@@ -1,0 +1,26 @@
+[
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "email": "admin@amalitech.com",
+      "name": "Admin User",
+      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "role": "ADMIN",
+      "created_at": "2024-01-01T00:00:00Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+      "email": "user@amalitech.com",
+      "name": "Test User",
+      "password": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "role": "USER",
+      "created_at": "2024-01-01T00:00:00Z",
+      "is_active": true
+    }
+  }
+]

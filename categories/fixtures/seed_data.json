@@ -1,0 +1,22 @@
+[
+  {
+    "model": "categories.category",
+    "pk": 1,
+    "fields": { "name": "General", "description": "General discussions and announcements" }
+  },
+  {
+    "model": "categories.category",
+    "pk": 2,
+    "fields": { "name": "Events", "description": "Upcoming community events" }
+  },
+  {
+    "model": "categories.category",
+    "pk": 3,
+    "fields": { "name": "Tech", "description": "Technology related posts" }
+  },
+  {
+    "model": "categories.category",
+    "pk": 4,
+    "fields": { "name": "Help", "description": "Questions and help requests" }
+  }
+]
