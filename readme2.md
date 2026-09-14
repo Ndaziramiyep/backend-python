@@ -21,6 +21,8 @@ erDiagram
         varchar     password
         varchar     role              "ADMIN | USER"
         boolean     is_active         "admin deactivates, never deletes"
+        boolean     is_online         "true while a valid JWT is active"
+        timestamptz last_seen         "nullable - updated on login/each authed request"
         timestamptz created_at
     }
 
@@ -34,7 +36,7 @@ erDiagram
         bigint      id          PK
         varchar     title
         text        content
-        varchar     image             "nullable - stretch goal"
+        varchar     image             "nullable - stores an image URL"
         bigint      category_id FK
         bigint      author_id   FK
         timestamptz created_at

@@ -1,5 +1,6 @@
 from typing import Optional, Tuple
 
+from django.utils import timezone
 from rest_framework.authentication import BaseAuthentication
 
 from accounts.jwt_auth import decode_token
@@ -27,5 +28,7 @@ class JWTAuthentication(BaseAuthentication):
             user = User.objects.get(email=payload.get("sub"))
         except User.DoesNotExist:
             return None
+
+        User.objects.filter(pk=user.pk).update(is_online=True, last_seen=timezone.now())
 
         return user, token

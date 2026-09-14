@@ -7,6 +7,7 @@ class PostRequestSerializer(serializers.Serializer):
     title = serializers.CharField(min_length=1)
     content = serializers.CharField(min_length=1)
     categoryId = serializers.IntegerField(required=False, allow_null=True, default=None)
+    image = serializers.URLField(required=False, allow_null=True, default=None)
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -24,6 +25,7 @@ class PostSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "content",
+            "image",
             "categoryName",
             "categoryId",
             "authorName",

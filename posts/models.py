@@ -7,6 +7,7 @@ from categories.models import Category
 class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
+    image = models.URLField(max_length=2048, null=True, blank=True)
 
     # db_index=False: the composite indexes below already lead with this
     # column, so a separate single-column index would be redundant.

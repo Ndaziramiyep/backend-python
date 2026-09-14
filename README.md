@@ -125,6 +125,8 @@ CREATE TABLE users (
     role        VARCHAR(10)  NOT NULL DEFAULT 'USER' CHECK (role IN ('USER', 'ADMIN')),
     created_at  TIMESTAMPTZ  NOT NULL DEFAULT now(),
     is_active   BOOLEAN      NOT NULL DEFAULT TRUE,
+    is_online   BOOLEAN      NOT NULL DEFAULT FALSE,
+    last_seen   TIMESTAMPTZ,
     last_login  TIMESTAMPTZ
     -- unique constraint on `email` doubles as its lookup index
 );
@@ -140,6 +142,7 @@ CREATE TABLE posts (
     id           BIGSERIAL PRIMARY KEY,
     title        VARCHAR(255) NOT NULL,
     content      TEXT NOT NULL,
+    image        VARCHAR(2048),
     category_id  BIGINT REFERENCES categories(id) ON DELETE SET NULL,
     author_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -182,6 +185,8 @@ erDiagram
         varchar password
         varchar role
         timestamptz created_at
+        boolean is_online
+        timestamptz last_seen
     }
     CATEGORIES {
         bigint id PK
@@ -192,6 +197,7 @@ erDiagram
         bigint id PK
         varchar title
         text content
+        varchar image
         bigint category_id FK
         bigint author_id FK
         timestamptz created_at

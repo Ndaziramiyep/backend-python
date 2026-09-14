@@ -20,6 +20,8 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=10, choices=Role.choices, default=Role.USER)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
+    is_online = models.BooleanField(default=False)
+    last_seen = models.DateTimeField(null=True, blank=True)
 
     objects = UserManager()
 

@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -14,6 +15,12 @@ def _auth_response(user: User) -> Response:
     return Response(AuthResponseSerializer(payload).data)
 
 
+def _mark_online(user: User) -> None:
+    user.is_online = True
+    user.last_seen = timezone.now()
+    user.save(update_fields=["is_online", "last_seen"])
+
+
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -28,6 +35,7 @@ class RegisterView(APIView):
         user = User(email=data["email"], name=data["name"], role=Role.USER)
         user.set_password(data["password"])
         user.save()
+        _mark_online(user)
 
         return _auth_response(user)
 
@@ -47,5 +55,7 @@ class LoginView(APIView):
 
         if not user.check_password(data["password"]):
             raise AuthenticationFailed("Invalid credentials")
+
+        _mark_online(user)
 
         return _auth_response(user)

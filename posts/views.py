@@ -44,7 +44,7 @@ class PostListCreateView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
-        post = Post(title=data["title"], content=data["content"], author=request.user)
+        post = Post(title=data["title"], content=data["content"], image=data.get("image"), author=request.user)
         _apply_category(post, data.get("categoryId"))
         post.save()
         post.comment_count = 0
@@ -83,6 +83,7 @@ class PostDetailView(APIView):
 
         post.title = data["title"]
         post.content = data["content"]
+        post.image = data.get("image")
         _apply_category(post, data.get("categoryId"))
         post.updated_at = timezone.now()
         post.save()
